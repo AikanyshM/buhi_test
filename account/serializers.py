@@ -1,17 +1,29 @@
 from tabnanny import verbose
 from rest_framework import serializers
 from .models import User
-from main_app.serializers import ClientSerializer, AccountantSerializer, AdminUserSerializer
-from main_app.models import Client, Accountant, AdminUser, Application
+from main_app.serializers import ClientSerializer, AccountantSerializer
+from main_app.models import Client, Accountant, Application
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(max_length=128)
 
+    class Meta:
+        model = User
+        fields = ["username", "password", "password2"]
+
     def validate(self, data):
         if data['password'] != data['password2']:
             raise serializers.ValidationError('Пароли должны совпадать')
         return data
+
+    def save(self):
+        user = User(username=self.validated_data['username'], 
+                    is_staff=self.validated_data['is_staff'],
+                    is_superuser=self.validated_data['is_superuser']
+                    )
+        user.set_password(self.validated_data['password'])
+        user.save()
 
 
 
@@ -25,20 +37,23 @@ class ClientUserCreateSerializer(UserCreateSerializer):
         fields = ["client", "username", "password", "password2"]
 
     def save(self):
-        user = User(username=self.validated_data['username'])
+        user = User(username=self.validated_data['username'], 
+                    is_staff=self.validated_data['is_staff'],
+                    is_superuser=self.validated_data['is_superuser'],
+                    )
         user.set_password(self.validated_data['password'])
         user.save()
         try:
-            client = Client(user=user, client_type = self.validated_data['client']['client_type'],
-            is_staff=self.validated_data['is_staff'],
-            is_superuser=self.validated_data['is_superuser'], 
-            company_form = self.validated_data['client']['company_form'],
-            company_name=self.validated_data['client']['company_name'],
-            company_inn=self.validated_data['client']['company_inn'],
-            phone_number=self.validated_data['client']['phone_number'],
-            tax_regime=self.validated_data['client']['tax_regime'],
-            operation_amount=self.validated_data['client']['operation_amount'],
-            employees_quantity=self.validated_data['client']['employees_quantity']),
+            client = Client(
+                user=user, client_type = self.validated_data['client']['client_type'],
+                company_form = self.validated_data['client']['company_form'],
+                company_name=self.validated_data['client']['company_name'],
+                company_inn=self.validated_data['client']['company_inn'],
+                phone_number=self.validated_data['client']['phone_number'],
+                tax_regime=self.validated_data['client']['tax_regime'],
+                operation_amount=self.validated_data['client']['operation_amount'],
+                employees_quantity=self.validated_data['client']['employees_quantity']
+                )
             client.save()
         except Exception as e:
             print(e)
@@ -47,29 +62,19 @@ class ClientUserCreateSerializer(UserCreateSerializer):
             return user
 
 
-class AdminUserCreateSerializer(UserCreateSerializer):
-    admin = AdminUserSerializer()
+# class AdminUserCreateSerializer(UserCreateSerializer):
+#     class Meta:
+#         model = User
+#         fields = ["username", "password", "password2"]
 
-    class Meta:
-        model = User
-        fields = ["admin", "username", "password", "password2"]
+#     def save(self):
+#         user = User(username=self.validated_data['username'], 
+#                     is_staff=self.validated_data['is_staff'],
+#                     is_superuser=self.validated_data['is_superuser'],
+#                     )
 
-    def save(self):
-        user = User(username=self.validated_data['username'])
-        user.set_password(self.validated_data['password'])
-        user.save()
-        try:
-            admin = AdminUser(user=user,
-            is_staff=self.validated_data['is_staff'],
-            is_superuser=self.validated_data['is_superuser']), 
-            admin.save()
-        except Exception as e:
-            print(e)
-            user.delete()
-        else:
-            return user
-
-
+#         user.save()
+#         return user
 
 
 class AccountantUserCreateSerializer(UserCreateSerializer):

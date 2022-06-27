@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import User, Application, AdminUser, Accountant, Client
-from .serializers import ApplicationSerializer, AdminUserSerializer, AccountantSerializer, ClientSerializer
+from .models import User, Application, Accountant, Client
+from .serializers import ApplicationSerializer, AccountantSerializer, ClientSerializer
 from rest_framework import authentication
 from rest_framework import permissions
 from rest_framework.response import Response

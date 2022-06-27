@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Client, Application, AdminUser, Accountant
+from .models import User, Client, Application, Accountant
 
 
 
@@ -11,11 +11,11 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 
-class AdminUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AdminUser
-        fields = '__all__'
-        read_only_fields = ['user', ]
+# class AdminUserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = AdminUser
+#         fields = '__all__'
+#         read_only_fields = ['user', ]
 
 
     
