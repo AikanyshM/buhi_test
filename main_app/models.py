@@ -36,13 +36,6 @@ class Client(models.Model):
     def __str__(self):
         return self.user.email
 
-# class AdminUser(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    
-#     def __str__(self):
-#         return self.user.email
-
 
 class Accountant(models.Model):
     first_last_name = models.CharField(max_length=100, verbose_name = "ФИО бухгалтера")
@@ -73,6 +66,9 @@ class Accountant(models.Model):
     payment_methods = models.CharField(max_length=30, choices=PAYMENT_TYPES, default='Мбанк', verbose_name = "Способы оплаты")
     upload_files = models.FileField(upload_to='accountant_docs/', verbose_name = "Загрузить файлы (дипломы, сертификаты)")
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+
+    def __str__(self):
+        return self.user.email
 
 class Application(models.Model):
     company_name = models.CharField(max_length=100)

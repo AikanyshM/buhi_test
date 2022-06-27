@@ -10,14 +10,6 @@ class ClientSerializer(serializers.ModelSerializer):
         read_only_fields = ['user', ]
 
 
-
-# class AdminUserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = AdminUser
-#         fields = '__all__'
-#         read_only_fields = ['user', ]
-
-
     
 class AccountantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +18,6 @@ class AccountantSerializer(serializers.ModelSerializer):
         read_only_fields = ['user', ]
 
 
-    
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:

@@ -31,7 +31,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class ClientUserCreateSerializer(UserCreateSerializer):
     client = ClientSerializer()
 
-
     class Meta:
         model = User
         fields = ["client", "username", "password", "password2"]
@@ -62,21 +61,6 @@ class ClientUserCreateSerializer(UserCreateSerializer):
             return user
 
 
-# class AdminUserCreateSerializer(UserCreateSerializer):
-#     class Meta:
-#         model = User
-#         fields = ["username", "password", "password2"]
-
-#     def save(self):
-#         user = User(username=self.validated_data['username'], 
-#                     is_staff=self.validated_data['is_staff'],
-#                     is_superuser=self.validated_data['is_superuser'],
-#                     )
-
-#         user.save()
-#         return user
-
-
 class AccountantUserCreateSerializer(UserCreateSerializer):
     accountant = AccountantSerializer()
 
@@ -89,17 +73,18 @@ class AccountantUserCreateSerializer(UserCreateSerializer):
         user.set_password(self.validated_data['password'])
         user.save()
         try:
-            accountant = Accountant(user=user, first_last_name = self.validated_data['accountant']['first_last_name'],
-            is_staff=self.validated_data['is_staff'],
-            is_superuser=self.validated_data['is_superuser'], 
-            birth_date = self.validated_data['accountant']['birth_date'],
-            INN=self.validated_data['accountant']['INN'],
-            accountant_phone_number=self.validated_data['accountant']['accountant_phone_number'],
-            city=self.validated_data['accountant']['city'],
-            education=self.validated_data['accountant']['education'],
-            experience=self.validated_data['accountant']['experience'],
-            payment_methods=self.validated_data['accountant']['payment_methods']),
-            upload_files = self.validated_data['accountant']['upload_files']
+            accountant = Accountant(
+                user=user, 
+                first_last_name = self.validated_data['accountant']['first_last_name'],
+                birth_date = self.validated_data['accountant']['birth_date'],
+                INN=self.validated_data['accountant']['INN'],
+                accountant_phone_number=self.validated_data['accountant']['accountant_phone_number'],
+                city=self.validated_data['accountant']['city'],
+                education=self.validated_data['accountant']['education'],
+                experience=self.validated_data['accountant']['experience'],
+                payment_methods=self.validated_data['accountant']['payment_methods'],
+                upload_files = self.validated_data['accountant']['upload_files']
+            )
             accountant.save()
         except Exception as e:
             print(e)

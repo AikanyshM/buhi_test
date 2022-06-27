@@ -22,7 +22,7 @@ class UserCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = False
         serializer.validated_data['is_superuser'] = False
-        return serializer.save() 
+        serializer.save() 
     
     
 
@@ -35,7 +35,7 @@ class ClientCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = False
         serializer.validated_data['is_superuser'] = False
-        return serializer.save() 
+        serializer.save() 
     
 
 
@@ -49,7 +49,7 @@ class AdminCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = False
         serializer.validated_data['is_superuser'] = True
-        return serializer.save()
+        serializer.save()
     
 
 class AccountantCreateAPIView(CreateAPIView):
@@ -61,4 +61,4 @@ class AccountantCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = True
         serializer.validated_data['is_superuser'] = False
-        return serializer.save()
+        serializer.save()
