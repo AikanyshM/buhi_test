@@ -1,0 +1,1 @@
+web: gunicorn buhi_new.wsgi --log-file –

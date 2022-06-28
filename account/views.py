@@ -12,20 +12,7 @@ from .serializers import ClientUserCreateSerializer, AccountantUserCreateSeriali
 from .models import User
 from account.serializers import UserCreateSerializer
 
-
-class UserCreateAPIView(CreateAPIView):
-    queryset = User.objects.all()
-    permission_classes = [AllowAny, ]
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-
-
-    def perform_create(self, serializer):
-        serializer.validated_data['is_staff'] = False
-        serializer.validated_data['is_superuser'] = False
-        serializer.save() 
     
-    
-
 class ClientCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ClientUserCreateSerializer
