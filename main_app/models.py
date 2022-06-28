@@ -8,10 +8,9 @@ from datetime import date
 
 class Client(models.Model):
     TYPES_USER = [
-        ('клиент', 'клиент'),
-        ('провайдер', 'провайдер')
+        ('клиент', 'клиент')
     ]
-    client_type = models.CharField(max_length=30, choices = TYPES_USER, default = 'клиент', verbose_name = "Выберите свою роль")
+    client_type = models.CharField(max_length=30, choices=TYPES_USER, default = 'клиент', verbose_name = "Выберите свою роль")
 
     COMPANY_TYPES = [
         ('ОсОО', 'ОсОО'),
