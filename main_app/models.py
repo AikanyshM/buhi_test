@@ -19,7 +19,7 @@ class Client(models.Model):
     company_form = models.CharField(max_length=10, choices = COMPANY_TYPES, default='ОсОО', verbose_name="Правовая форма")
     company_name = models.CharField(max_length=200, verbose_name = "Название компании")
     company_inn = models.CharField(max_length=14, verbose_name = "ИНН компании")
-    phone_number = models.CharField(max_length=20, verbose_name = "Номер телефона")
+    phone_number = models.SmallIntegerField(verbose_name = "Номер телефона")
     TAX_TYPE = [
         ('Общий налоговый режим', 'Общий налоговый режим'),
         ('Единый налог', 'Единый налог'),
