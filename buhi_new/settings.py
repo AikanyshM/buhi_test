@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%miwcp2cbg%q-31je#kolx$lfi+=(280ro6o--os%^!48uy%yy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','new-buhi-kg.herokuapp.com']
 
@@ -124,4 +124,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = 'create/apps'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

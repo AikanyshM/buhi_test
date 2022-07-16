@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
-from .permissions import IsAdminOrAccountant, IsAccountant, IsAdminOrAuthenticated
+from .permissions import IsAdminOrAccountant, IsAccountant, IsAdmin
 
 
 class ClientListView(ListAPIView):
@@ -15,7 +15,6 @@ class ClientListView(ListAPIView):
     serializer_class = ClientSerializer
     permission_classes = [IsAdminOrAccountant, ]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-
 
 
 class ApplicationCreateAPIView(CreateAPIView):
@@ -36,4 +35,4 @@ class AccountantListAPIView(ListAPIView):
     queryset = Accountant.objects.all()
     serializer_class = AccountantSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAdminOrAuthenticated, ]
+    permission_classes = [IsAdminOrAccountant, ]

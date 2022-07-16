@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token 
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
-from .permissions import IsAdminOrAccountant, IsAccountant, IsAdminOrAuthenticated
+from .permissions import IsAdminOrAccountant, IsAccountant, IsAdmin
 
 from main_app.serializers import ClientSerializer
 from .serializers import ClientUserCreateSerializer, AccountantUserCreateSerializer
@@ -17,7 +17,7 @@ class ClientCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ClientUserCreateSerializer
     permission_classes = [AllowAny, ]
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    #authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = False
@@ -29,7 +29,7 @@ class ClientCreateAPIView(CreateAPIView):
 class AdminCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
-    permission_classes = [IsAdminUser, ]
+    permission_classes = [IsAdmin, ]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
 
 
