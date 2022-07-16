@@ -7,3 +7,4 @@ urlpatterns = [
     path('clients/', ClientListView.as_view(), name='clients'),
     path('accountants/', AccountantListAPIView.as_view(), name='accountants'),
 ]
+

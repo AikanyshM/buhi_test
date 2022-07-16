@@ -29,7 +29,7 @@ class Client(models.Model):
     tax_regime = models.CharField(max_length=50, choices=TAX_TYPE, default='Общий налоговый режим', verbose_name = "Режим налогообложения")
     operation_amount = models.CharField(max_length=20, verbose_name = "Количество торговых операций")
     employees_quantity = models.CharField(max_length=10, verbose_name = "Количество сотрудников")
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
 
 
     def __str__(self):
@@ -64,7 +64,7 @@ class Accountant(models.Model):
     ]
     payment_methods = models.CharField(max_length=30, choices=PAYMENT_TYPES, default='Мбанк', verbose_name = "Способы оплаты")
     upload_files = models.FileField(upload_to='accountant_docs/', verbose_name = "Загрузить файлы (дипломы, сертификаты)")
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, verbose_name='Пользователь')
 
     def __str__(self):
         return self.user.email
@@ -78,14 +78,14 @@ class Application(models.Model):
         ('Премиум', 'Премиум')
     ]
    
-    tariff = models.CharField(max_length=50, choices=TARIFF_TYPES, default='Нулевой', blank=True, null=True)
+    tariff = models.CharField(max_length=50, choices=TARIFF_TYPES, default='Нулевой', blank=False, null=False)
     APPLICATION_STATUS = [
-        ('в процессе', 'в процессе'),
+        ('новая', 'новая'),
         ('завершена', 'завершена'),
-        ('свободная', 'свободная')
+        ('в процессе', 'в процессе')
 
     ]
-    status = models.CharField(max_length=20, choices=APPLICATION_STATUS, default='свободная', blank=False, null=False)
+    status = models.CharField(max_length=20, choices=APPLICATION_STATUS, default='новая', blank=False, null=False)
 
     SERVICES = [
         ('сдать ежемесячный отчет для ОсОО', 'сдать ежемесячный отчет для ОсОО'),
@@ -96,6 +96,13 @@ class Application(models.Model):
     services = models.CharField(max_length=100, choices=SERVICES, blank=True, null=True)
     
     deadline = models.DateField(default=date.today() + timedelta(days=14))
+    
+    APPROVAl_STATUS = [
+        ('на рассмотрении', 'на рассмотрении'),
+        ('одобрено', 'одобрено')
+
+    ]
+    approval_status = models.CharField(max_length=20, choices=APPROVAl_STATUS, default='на рассмотрении', blank=False, null=False)
 
     def __str__(self):
         return self.company_name
