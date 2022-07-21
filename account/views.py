@@ -17,7 +17,7 @@ class ClientCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ClientUserCreateSerializer
     permission_classes = [AllowAny, ]
-    #authentication_classes = [TokenAuthentication, SessionAuthentication]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def perform_create(self, serializer):
         serializer.validated_data['is_staff'] = False

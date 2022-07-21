@@ -38,7 +38,7 @@ class ClientUserCreateSerializer(UserCreateSerializer):
     def save(self):
         user = User(username=self.validated_data['username'], 
                     is_staff=self.validated_data['is_staff'],
-                    is_superuser=self.validated_data['is_superuser'],
+                    is_superuser=self.validated_data['is_superuser']
                     )
         user.set_password(self.validated_data['password'])
         user.save()

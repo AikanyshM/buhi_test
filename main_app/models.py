@@ -6,12 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from datetime import date
 
 
-class Client(models.Model):
-    TYPES_USER = [
-        ('клиент', 'клиент')
-    ]
-    client_type = models.CharField(max_length=30, choices=TYPES_USER, default = 'клиент', verbose_name = "Выберите свою роль")
-
+class Client(models.Model):    
     COMPANY_TYPES = [
         ('ОсОО', 'ОсОО'),
         ('ИП', 'ИП')
