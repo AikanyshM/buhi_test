@@ -13,8 +13,8 @@ class Client(models.Model):
     ]
     company_form = models.CharField(max_length=10, choices = COMPANY_TYPES, default='ОсОО', verbose_name="Правовая форма")
     company_name = models.CharField(max_length=200, verbose_name = "Название компании")
-    company_inn = models.SmallIntegerField(verbose_name = "ИНН компании", unique=True)
-    phone_number = models.SmallIntegerField(verbose_name = "Номер телефона")
+    company_inn = models.PositiveSmallIntegerField(verbose_name = "ИНН компании", unique=True)
+    phone_number = models.PositiveSmallIntegerField(verbose_name = "Номер телефона")
     TAX_TYPE = [
         ('Общий налоговый режим', 'Общий налоговый режим'),
         ('Единый налог', 'Единый налог'),
@@ -22,8 +22,8 @@ class Client(models.Model):
         ('Другое', 'Другое')
     ] 
     tax_regime = models.CharField(max_length=50, choices=TAX_TYPE, default='Общий налоговый режим', verbose_name = "Режим налогообложения")
-    operation_amount = models.SmallIntegerField(verbose_name = "Количество торговых операций")
-    employees_quantity = models.SmallIntegerField(max_length=10, verbose_name = "Количество сотрудников")
+    operation_amount = models.PositiveSmallIntegerField(verbose_name = "Количество торговых операций")
+    employees_quantity = models.PositiveSmallIntegerField(max_length=10, verbose_name = "Количество сотрудников")
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
 
 
@@ -34,8 +34,8 @@ class Client(models.Model):
 class Accountant(models.Model):
     first_last_name = models.CharField(max_length=100, verbose_name = "ФИО бухгалтера")
     birth_date = models.DateField(verbose_name = "Дата рождения")
-    INN = models.SmallIntegerField(verbose_name = "ИНН", unique=True)
-    accountant_phone_number = models.SmallIntegerField(max_length=12, verbose_name = "Номер телефона")
+    INN = models.PositiveSmallIntegerField(verbose_name = "ИНН", unique=True)
+    accountant_phone_number = models.PositiveSmallIntegerField(max_length=12, verbose_name = "Номер телефона")
     CITIES = [
         ('Бишкек', 'Бишкек'),
         ('Ош', 'Ош')
