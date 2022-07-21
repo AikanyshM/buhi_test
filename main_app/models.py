@@ -22,8 +22,8 @@ class Client(models.Model):
         ('Другое', 'Другое')
     ] 
     tax_regime = models.CharField(max_length=50, choices=TAX_TYPE, default='Общий налоговый режим', verbose_name = "Режим налогообложения")
-    operation_amount = models.CharField(max_length=20, verbose_name = "Количество торговых операций")
-    employees_quantity = models.CharField(max_length=10, verbose_name = "Количество сотрудников")
+    operation_amount = models.SmallIntegerField(verbose_name = "Количество торговых операций")
+    employees_quantity = models.SmallIntegerField(max_length=10, verbose_name = "Количество сотрудников")
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
 
 
@@ -35,7 +35,7 @@ class Accountant(models.Model):
     first_last_name = models.CharField(max_length=100, verbose_name = "ФИО бухгалтера")
     birth_date = models.DateField(verbose_name = "Дата рождения")
     INN = models.SmallIntegerField(verbose_name = "ИНН", unique=True)
-    accountant_phone_number = models.CharField(max_length=12, verbose_name = "Номер телефона")
+    accountant_phone_number = models.SmallIntegerField(max_length=12, verbose_name = "Номер телефона")
     CITIES = [
         ('Бишкек', 'Бишкек'),
         ('Ош', 'Ош')
