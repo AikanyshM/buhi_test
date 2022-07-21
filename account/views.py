@@ -16,7 +16,7 @@ from account.serializers import UserCreateSerializer
 class ClientCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ClientUserCreateSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    #authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [AllowAny, ]
 
 
@@ -43,7 +43,7 @@ class AdminCreateAPIView(CreateAPIView):
 class AccountantCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = AccountantUserCreateSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    #authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [AllowAny, ]
 
     def perform_create(self, serializer):

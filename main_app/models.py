@@ -13,7 +13,7 @@ class Client(models.Model):
     ]
     company_form = models.CharField(max_length=10, choices = COMPANY_TYPES, default='ОсОО', verbose_name="Правовая форма")
     company_name = models.CharField(max_length=200, verbose_name = "Название компании")
-    company_inn = models.CharField(max_length=14, verbose_name = "ИНН компании", unique=True)
+    company_inn = models.SmallIntegerField(verbose_name = "ИНН компании", unique=True)
     phone_number = models.SmallIntegerField(verbose_name = "Номер телефона")
     TAX_TYPE = [
         ('Общий налоговый режим', 'Общий налоговый режим'),
@@ -34,7 +34,7 @@ class Client(models.Model):
 class Accountant(models.Model):
     first_last_name = models.CharField(max_length=100, verbose_name = "ФИО бухгалтера")
     birth_date = models.DateField(verbose_name = "Дата рождения")
-    INN = models.CharField(max_length=14, verbose_name = "ИНН", unique=True)
+    INN = models.SmallIntegerField(verbose_name = "ИНН", unique=True)
     accountant_phone_number = models.CharField(max_length=12, verbose_name = "Номер телефона")
     CITIES = [
         ('Бишкек', 'Бишкек'),
