@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from rest_framework import serializers
 from .models import User
 from main_app.serializers import ClientSerializer, AccountantSerializer
@@ -44,7 +43,7 @@ class ClientUserCreateSerializer(UserCreateSerializer):
         user.save()
         try:
             client = Client(
-                user=user, client_type = self.validated_data['client']['client_type'],
+                user=user, 
                 company_form = self.validated_data['client']['company_form'],
                 company_name=self.validated_data['client']['company_name'],
                 company_inn=self.validated_data['client']['company_inn'],
